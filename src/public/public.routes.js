@@ -41,30 +41,17 @@ function routeConfig ($stateProvider) {
         }]
       }
     })
-    .state('public.signup', {
-      url: '/signup',
-      templateUrl: 'src/public/signup/signup.html',
-      controller: 'SignUpController',
-      controllerAs: 'signUpCtrl'
-    })
     .state('public.myinfo', {
       url: '/myinfo',
-      templateUrl: 'src/public/myinfo/myinfo.html',
+      templateUrl: 'src/public/users/myinfo.html',
       controller: 'MyInfoController',
-      controllerAs: 'myInfoCtrl',
-      resolve: {
-        user: ['UserService', function (UserService) {
-          return UserService.getMyInfo();
-        }],
-        favorite: ['MenuService', 'user', function(MenuService, user) {
-          if (!user || !user.favorite) {
-            return null; // Handle error if user or user.favorite is null
-          }
-          return MenuService.getMenuItem(user.favorite);
-        }]
-      }
+      controllerAs: 'myinfoCtlr'
+    })
+    .state('public.signup', {
+      url: '/signup',
+      templateUrl: 'src/public/users/signup.html',
+      controller: 'SignUpController',
+      controllerAs: 'signupCtlr'
     });
-
-
 }
 })();

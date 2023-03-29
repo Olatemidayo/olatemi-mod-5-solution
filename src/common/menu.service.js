@@ -17,22 +17,18 @@ function MenuService($http, ApiPath) {
 
 
   service.getMenuItems = function (category) {
-    return $http.get(ApiPath + '/menu_items/' + category + '.json').then(function (response) {
-      return response.data;
-    });
-  };
+    var config = {};
+    if (category) {
+      config.params = {'category': category};
+    }
 
-
-  service.getMenuItem = function (shortname) {
-    var parts = shortname.split(/(\d+)/);
-    var shortName = parts[0];
-    var menuNumber = parts[1];
-
-    var menuNumber = menuNumber - 1;
-    return $http.get(ApiPath + '/menu_items/' + shortName + '/menu_items/' + menuNumber + '.json').then(function (response) {
+    return $http.get(ApiPath + '/menu_items.json', config).then(function (response) {
       return response.data;
     });
   };
 
 }
+
+
+
 })();
